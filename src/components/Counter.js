@@ -1,7 +1,7 @@
 import { useState } from "react";
 import classes from "./Counter.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { counterActions } from "../store";
+import { counterActions } from "../store/counter";
 
 const Counter = () => {
   //old

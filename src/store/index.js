@@ -1,28 +1,30 @@
 import redux, { createStore } from "redux";
 import { configureStore, createSlice } from "@reduxjs/toolkit";
+import counterReducer from "./counter";
 
 //redux toolkit
-const counterSlice = createSlice({
-  name: "counter",
-  initialState: { counter: 0, showCounter: true },
-  reducers: {
-    increment(state) {
-      state.counter++;
-    },
-    decrement(state) {
-      state.counter--;
-    },
-    increase(state, action = { amount: 5 }) {
-      state.counter = state.counter + action.payload;
-    },
-    reset(state) {
-      state.counter = state.counter = 0;
-    },
-    toggleCounter(state) {
-      state.showCounter = !state.showCounter;
-    },
-  },
-});
+//counterSlice splitted to another file
+// const counterSlice = createSlice({
+//   name: "counter",
+//   initialState: { counter: 0, showCounter: true },
+//   reducers: {
+//     increment(state) {
+//       state.counter++;
+//     },
+//     decrement(state) {
+//       state.counter--;
+//     },
+//     increase(state, action = { amount: 5 }) {
+//       state.counter = state.counter + action.payload;
+//     },
+//     reset(state) {
+//       state.counter = state.counter = 0;
+//     },
+//     toggleCounter(state) {
+//       state.showCounter = !state.showCounter;
+//     },
+//   },
+// });
 
 const authSlice = createSlice({
   name: "isAuthenticated",
@@ -38,11 +40,11 @@ const authSlice = createSlice({
 });
 
 const store = configureStore({
-  reducer: { counter: counterSlice.reducer, auth: authSlice.reducer }, //they will be merged automatically to one main reducer
+  reducer: { counter: counterReducer, auth: authSlice.reducer }, //they will be merged automatically to one main reducer
 }); //configureStore allow us to merge reducers but in this app we don't need it actually
 
 // dispatch actions
-export const counterActions = counterSlice.actions;
+// export const counterActions = counterReducer.actions;
 export const authActions = authSlice.actions;
 
 export default store;
