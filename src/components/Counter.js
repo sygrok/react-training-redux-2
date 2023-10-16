@@ -13,8 +13,11 @@ const Counter = () => {
   // };
 
   const dispatch = useDispatch();
-  const counter = useSelector((x) => x.counter);
-  const show = useSelector((x) => x.showCounter);
+  // const counter = useSelector((x) => x.counter);
+  const counter = useSelector((x) => x.counter.counter); //since we have merged the slices, now we have to specify the name before accessing state
+  const show = useSelector((x) => x.counter.showCounter);
+
+  //dispatch actions
   const incrementHandler = () => {
     dispatch(counterActions.increment());
   };
@@ -31,13 +34,14 @@ const Counter = () => {
   return (
     <main className={classes.counter}>
       <h1>Redux Counter</h1>
-      {show && <div className={classes.value}>-- {counter} --</div>}
+      <div className={classes.value}>-- {show && counter} --</div>
       <div>
         <button onClick={incrementHandler}>Increment</button>
         <button onClick={increaseHandler}>Custom Increase</button>
         <button onClick={decrementHandler}>Decrement</button>
       </div>
       <button onClick={toggleHandler}>Toggle Counter</button>
+      <button onClick={() => dispatch(counterActions.reset())}>Reset</button>
     </main>
   );
 };

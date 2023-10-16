@@ -15,20 +15,41 @@ const counterSlice = createSlice({
     increase(state, action = { amount: 5 }) {
       state.counter = state.counter + action.payload;
     },
+    reset(state) {
+      state.counter = state.counter = 0;
+    },
     toggleCounter(state) {
       state.showCounter = !state.showCounter;
     },
   },
 });
 
+const authSlice = createSlice({
+  name: "isAuthenticated",
+  initialState: { isAuthenticated: false },
+  reducers: {
+    login(state) {
+      state.isAuthenticated = true;
+    },
+    logout(state) {
+      state.isAuthenticated = false;
+    },
+  },
+});
+
 const store = configureStore({
-  reducer: counterSlice.reducer,
+  reducer: { counter: counterSlice.reducer, auth: authSlice.reducer }, //they will be merged automatically to one main reducer
 }); //configureStore allow us to merge reducers but in this app we don't need it actually
 
-export const counterActions = counterSlice.actions; // dispatch actions
+// dispatch actions
+export const counterActions = counterSlice.actions;
+export const authActions = authSlice.actions;
+
 export default store;
 
-//Old use of redux
+////////
+
+//Old
 // const counterReducer = (
 //   state = { counter: 0, showCounter: true },
 //   action = { amount: 3 }
