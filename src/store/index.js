@@ -13,7 +13,7 @@ const counterSlice = createSlice({
       state.counter--;
     },
     increase(state, action = { amount: 5 }) {
-      state.counter = state.counter + action.amount;
+      state.counter = state.counter + action.payload;
     },
     toggleCounter(state) {
       state.showCounter = !state.showCounter;
@@ -25,6 +25,7 @@ const store = configureStore({
   reducer: counterSlice.reducer,
 }); //configureStore allow us to merge reducers but in this app we don't need it actually
 
+export const counterActions = counterSlice.actions; // dispatch actions
 export default store;
 
 //Old use of redux
